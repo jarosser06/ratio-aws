@@ -1,0 +1,76 @@
+{
+  "description": "An agent that queries AWS Price List API to retrieve pricing information for various AWS services. Supports both raw filters and service-specific configuration helpers for easier usage.",
+  "arguments": [
+    {
+      "name": "service_code",
+      "type_name": "string",
+      "description": "The AWS service code to query pricing for (e.g., 'AmazonEC2', 'AmazonRDS', 'AmazonS3')",
+      "required": true
+    },
+    {
+      "name": "regions",
+      "type_name": "list",
+      "description": "List of AWS regions to query pricing for (e.g., ['us-east-1', 'eu-west-1'])",
+      "required": false,
+      "default_value": ["us-east-1"]
+    },
+    {
+      "name": "filters",
+      "type_name": "object",
+      "description": "Pricing filters as key-value pairs. Can use either AWS API field names or friendly names that get mapped internally",
+      "required": false
+    },
+    {
+      "name": "max_records",
+      "type_name": "number",
+      "description": "Maximum number of pricing records to return. Cannot be more than 100",
+      "required": false,
+      "default_value": 50
+    },
+    {
+      "name": "result_file_path",
+      "type_name": "string",
+      "description": "Path where the pricing results should be saved. If not provided, a file will be created in the working directory",
+      "required": false
+    }
+  ],
+  "responses": [
+    {
+      "name": "pricing_records",
+      "type_name": "list",
+      "description": "List of pricing records matching the query criteria",
+      "required": true
+    },
+    {
+      "name": "result_file_path",
+      "type_name": "file",
+      "description": "Path to the file containing the detailed pricing results",
+      "required": true
+    },
+    {
+      "name": "service_code",
+      "type_name": "string",
+      "description": "The AWS service code that was queried",
+      "required": true
+    },
+    {
+      "name": "regions_queried",
+      "type_name": "list",
+      "description": "List of regions that were included in the query",
+      "required": true
+    },
+    {
+      "name": "record_count",
+      "type_name": "number",
+      "description": "Total number of pricing records returned",
+      "required": true
+    },
+    {
+      "name": "filters_applied",
+      "type_name": "object", 
+      "description": "The normalized filters that were applied to the AWS API",
+      "required": true
+    }
+  ],
+  "system_event_endpoint": "ratio::agent::aws::pricing::execution"
+}

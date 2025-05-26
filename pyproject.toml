@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "ratio-aws"
+version = "0.1.0"
+description = "Ratio AWS Agent Plugins"
+authors = ["Jim Rosser <me@j4r.wtf>"]
+license = "Apache v2"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+boto3 = "^1.35.10"
+da-vinci = { git = "https://github.com/jarosser06/da-vinci", develop = true, subdirectory = "da_vinci" }
+ratio = { git = "https://github.com/jarosser06/ratio", develop = true }
+
+[tool.poetry.group.dev.dependencies]
+da-vinci-cdk = { git = "https://github.com/jarosser06/da-vinci", develop = true, subdirectory = "da_vinci-cdk" }
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
